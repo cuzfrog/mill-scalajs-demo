@@ -17,9 +17,14 @@ object ServerMain extends App {
   val route =
     pathSingleSlash {
       get {
-        complete(HttpEntity(ContentTypes.`text/html(UTF-8)`, IndexPage.skeleton))
+        complete(HttpEntity(ContentTypes.`text/html(UTF-8)`, IndexPage.skeleton.render))
       }
-    }
+    } ~
+      pathPrefix("assets" / Remaining) { file =>
+        encodeResponse {
+          getFromResource(s"assets/$file")
+        }
+      }
 
   val bindingFuture = Http().bindAndHandle(route, "0.0.0.0", 8080)
 

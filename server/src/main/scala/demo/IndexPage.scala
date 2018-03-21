@@ -1,9 +1,10 @@
 package demo
 
+import scalatags.Text
 import scalatags.Text.all._
 
 private object IndexPage {
-  val skeleton: String =
+  val skeleton: Text.TypedTag[String] =
     html(
       head(
         scalatags.Text.tags2.title("mill-scalajs-demo"),
@@ -15,5 +16,5 @@ private object IndexPage {
         div(id := "app"),
         script(`type` := "text/javascript", src := "assets/main.bundle.js")
       )
-    ).render
+    )
 }
