@@ -1,0 +1,6 @@
+.idea/
+.idea_modules/
+out/
+*.iml
+node_modules/
+server/src/main/resources/assets/
