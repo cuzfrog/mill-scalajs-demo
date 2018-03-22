@@ -9,7 +9,7 @@ const config = {
   },
   output: {
     filename: '[name].bundle.js',
-    path: path.resolve(__dirname, './server/src/main/resources/assets') //overridden in serverSettings
+    path: path.resolve(__dirname, './server/resources/assets') //overridden in serverSettings
   },
   module: {
     rules: [

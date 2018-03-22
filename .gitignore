@@ -4,7 +4,4 @@ out/
 *.iml
 *.log
 node_modules/
-server/src/main/resources/assets/*
-
-# launcher:
-!server/src/main/resources/assets/launcher.js
+server/resources/assets/*
