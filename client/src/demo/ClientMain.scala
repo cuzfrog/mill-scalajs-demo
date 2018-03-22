@@ -1,12 +1,12 @@
 package demo
 
-import demo.component.BasicView
+import demo.component.GreetingView
 import sri.web.ReactDOM
 import org.scalajs.dom
 
 object ClientMain {
   def main(args: Array[String]): Unit = {
-    ReactDOM.render(BasicView(), dom.document.getElementById("app"))
+    ReactDOM.render(GreetingView(), dom.document.getElementById("app"))
     println("Client render done!")
   }
 }
