@@ -32,6 +32,11 @@ object server extends CommonConfig {
       ivy"com.lihaoyi::scalatags:0.6.7"
     )
   }
+
+  object test extends Tests{
+    override final def ivyDeps = Agg(ivy"com.lihaoyi::utest::0.6.0")
+    override final def testFrameworks = Seq("utest.runner.Framework")
+  }
 }
 
 object client extends CommonConfig with ScalaJSModule {
@@ -45,14 +50,13 @@ object client extends CommonConfig with ScalaJSModule {
     )
   }
 
-  object test extends Tests{
+  object test extends Tests {
     override final def ivyDeps = Agg(ivy"com.github.cuzfrog::sjest::0.2.0")
     override final def testFrameworks = Seq("demo.MyJestTestFramework")
+    override final def moduleKind = T { ModuleKind.CommonJSModule }
   }
 
-  override def moduleKind = T {
-    ModuleKind.CommonJSModule
-  }
+  override final def moduleKind = T { ModuleKind.CommonJSModule }
 }
 
-object shared extends CommonConfig{}
+object shared extends CommonConfig {}
