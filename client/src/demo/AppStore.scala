@@ -1,11 +1,11 @@
 package demo
 
-import diode.{ActionHandler, ActionResult, Circuit}
 import diode.react.ReactConnector
+import diode.{ActionHandler, Circuit}
 
 object AppStore extends Circuit[RootModel] with ReactConnector[RootModel] {
   override protected val initialModel: RootModel = RootModel(
-    loginForm = LoginForm()
+    loginForm = LoginFormData()
   )
 
   private val loginFormReducer = new ActionHandler(zoomTo(_.loginForm)) {
