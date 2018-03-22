@@ -13,8 +13,8 @@ const config = {
   },
   module: {
     rules: [
-      {test: /\.css$/, use: 'css-loader'},
-      {test: /\.js$/, use: ["source-map-loader"], exclude:['https:']}
+      {test: /\.css$/, use: 'css-loader'}
+      //{test: /\.js$/, use: ["source-map-loader"], exclude:['https:', './https']}
     ]
   },
   plugins: [
@@ -23,7 +23,8 @@ const config = {
       {from: 'node_modules/font-awesome/css', to: 'css/'},
       {from: 'node_modules/font-awesome/fonts', to: 'fonts/'},
     ])
-  ]
+  ],
+  mode: 'development'
 };
 
 module.exports = config;

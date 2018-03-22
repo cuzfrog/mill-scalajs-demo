@@ -51,7 +51,7 @@ object client extends CommonConfig with ScalaJSModule {
     )
   }
 
-//  override def moduleKind = T {
-//    ModuleKind.CommonJSModule
-//  }
+  override def moduleKind = T {
+    ModuleKind.CommonJSModule
+  }
 }
