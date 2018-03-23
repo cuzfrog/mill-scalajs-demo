@@ -4,7 +4,7 @@ import diode.react.ReactConnector
 import diode.{ActionHandler, Circuit}
 
 object AppStore extends Circuit[RootModel] with ReactConnector[RootModel] {
-  override protected val initialModel: RootModel = RootModel(
+  override protected def initialModel: RootModel = RootModel(
     greetingWords = "welcome!",
     loginForm = LoginFormData()
   )
