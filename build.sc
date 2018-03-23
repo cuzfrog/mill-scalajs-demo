@@ -20,7 +20,7 @@ trait CommonConfig extends ScalaModule {
 
   override def ivyDeps = Agg(
     ivy"com.typesafe.play::play-json::2.6.9",
-    ivy"io.suzaku::diode::1.1.3"
+    ivy"io.suzaku::diode::1.1.2"
   )
 }
 

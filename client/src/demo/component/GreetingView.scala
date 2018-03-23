@@ -1,5 +1,6 @@
 package demo.component
 
+import demo.AppStore
 import sri.react._
 import sri.web.vdom.tagsPrefix_<^._
 
@@ -10,7 +11,12 @@ final class GreetingView extends ComponentP[GreetingView.Props] {
 }
 
 object GreetingView {
-  case class Props(value: String = "Greetings!")
 
-  def apply(props: Props = Props()): CompositeElement = CreateElement[GreetingView](props)
+  final case class Props(value: String = "Greetings!")
+
+  def apply(): ReactElement = {
+    AppStore.connect(_.greetingWords) { proxy =>
+      CreateElement[GreetingView](Props(proxy()))
+    }
+  }
 }
