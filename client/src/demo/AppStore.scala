@@ -17,8 +17,12 @@ object AppStore extends Circuit[RootModel] with ReactConnector[RootModel] {
       case LoginFormAction.AccountInput(v) => updated(value.copy(account = v))
       case LoginFormAction.PasswordInput(v) => updated(value.copy(password = v))
       case LoginFormAction.LoginFormSubmit => value.validate match {
-        case Some(errorMsg) => updated(value.copy(errorMsg = errorMsg))
-        case None => updated(value.copy(errorMsg = "").value.lens(_.submitButton.isLoading).modify(_ => true))
+        case errorMsg if errorMsg.nonEmpty =>
+          println(s"validation failed: $errorMsg")
+          updated(value.copy(errorMsg = errorMsg))
+        case _ =>
+          println("validation successful")
+          updated(value.copy(errorMsg = Seq.empty).value.lens(_.submitButton.isLoading).modify(_ => true))
       }
     }
   }

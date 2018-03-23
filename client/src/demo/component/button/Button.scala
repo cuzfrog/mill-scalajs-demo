@@ -9,8 +9,14 @@ private final class Button extends ComponentP[Button.Props] {
   override def render(): ReactRenders = {
     <.button(
       ^.name := props.name,
-      ^.className := props.style.className
+      ^.className := className,
+      ^.onClick := props.onClickCallback
     )(props.caption)
+  }
+
+  private def className = {
+    val isLoading = if(props.isLoading) " is-loading" else ""
+    props.style.className + isLoading
   }
 }
 
@@ -23,7 +29,7 @@ private object Button {
             locator: RootModel => ButtonModel, action: UserAction,
             style: CssStyle = CssStyle.empty): ReactElement = {
     AppStore.connect(locator) { proxy =>
-      val model = proxy()
+      def model = proxy()
       val onClickCallback = (event: ReactEventI) => {
         event.preventDefault()
         println("Login form submitted!")

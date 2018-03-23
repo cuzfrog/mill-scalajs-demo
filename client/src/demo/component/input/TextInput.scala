@@ -7,7 +7,6 @@ import sri.web.vdom.tagsPrefix_<^._
 
 private final class TextInput extends ComponentP[TextInput.Pros] {
   override def render(): ReactRenders = {
-    println(s"TextInput[${props.name}] rendered with value: '${props.value}'")
     <.input(
       ^.name := props.name,
       ^.className := props.style.className,
@@ -29,7 +28,6 @@ private object TextInput {
       def value: String = proxy.apply()
       val onChangeCallback: ReactEventI => Unit = (event: ReactEventI) => {
         val newValue = event.target.value
-        println(s"Received input value: '$newValue' | old value: '$value'")
         event.defaultPrevented
         proxy.dispatch(action(newValue))
       }

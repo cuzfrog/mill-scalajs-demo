@@ -37,6 +37,6 @@ private[component] object Control {
 
 private[component] object Icon {
   def apply(style: String = "")(icon: String): ReactElement = <.span(^.className := s"icon $style")(
-    <.i(^.className := s"fas $icon")()
+    <.i(^.className := s"fa $icon")()
   )
 }
