@@ -1,7 +1,8 @@
 package demo.component
 
-final case class CssStyle(className: String)
+private final case class CssStyle(className: String = "",
+                                  `type`: String = "")
 
-object CssStyle{
-  val empty: CssStyle = CssStyle("")
+private object CssStyle {
+  val empty: CssStyle = CssStyle()
 }

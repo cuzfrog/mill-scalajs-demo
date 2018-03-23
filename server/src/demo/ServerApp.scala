@@ -8,7 +8,7 @@ import akka.stream.ActorMaterializer
 
 import scala.concurrent.ExecutionContextExecutor
 
-object ServerMain extends App {
+object ServerApp extends App {
   private implicit val system: ActorSystem = ActorSystem("my-system")
   private implicit val materializer: ActorMaterializer = ActorMaterializer()
   // needed for the future flatMap/onComplete in the end

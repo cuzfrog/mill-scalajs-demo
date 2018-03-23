@@ -1,26 +1,30 @@
-package demo.component
+package demo.component.input
 
+import demo.component.CssStyle
 import demo.{AppStore, RootModel, UserAction}
 import sri.react._
 import sri.web.vdom.tagsPrefix_<^._
 
-final class TextInput extends ComponentP[TextInput.Pros] {
+private final class TextInput extends ComponentP[TextInput.Pros] {
   override def render(): ReactRenders = {
     println(s"TextInput[${props.name}] rendered with value: '${props.value}'")
     <.input(
       ^.name := props.name,
       ^.className := props.style.className,
+      ^.`type` := props.style.`type`,
+      ^.placeholder := props.placeholder,
       ^.value := props.value,
       ^.onChange := props.onChangeCallback
     )
   }
 }
 
-object TextInput {
+private object TextInput {
 
-  final case class Pros(name: String, value: String, onChangeCallback: ReactEventI => Unit, style: CssStyle)
+  final case class Pros(name: String, placeholder: String, value: String, onChangeCallback: ReactEventI => Unit, style: CssStyle)
 
-  def apply(name: String, locator: RootModel => String, action: String => UserAction, style: CssStyle = CssStyle.empty): ReactElement = {
+  def apply(name: String, placeholder: String, locator: RootModel => String,
+            action: String => UserAction, style: CssStyle = CssStyle.empty): ReactElement = {
     AppStore.connect(locator) { proxy =>
       def value: String = proxy.apply()
       val onChangeCallback: ReactEventI => Unit = (event: ReactEventI) => {
@@ -29,7 +33,7 @@ object TextInput {
         event.defaultPrevented
         proxy.dispatch(action(newValue))
       }
-      CreateElement[TextInput](Pros(name, value, onChangeCallback, style))
+      CreateElement[TextInput](Pros(name, placeholder, value, onChangeCallback, style))
     }
   }
 }

@@ -1,10 +1,11 @@
-package demo.component
+package demo.component.button
 
 import demo._
+import demo.component.CssStyle
 import sri.react._
 import sri.web.vdom.tagsPrefix_<^._
 
-final class Button extends ComponentP[Button.Props] {
+private final class Button extends ComponentP[Button.Props] {
   override def render(): ReactRenders = {
     <.button(
       ^.name := props.name,
@@ -13,7 +14,7 @@ final class Button extends ComponentP[Button.Props] {
   }
 }
 
-object Button {
+private object Button {
   final case class Props(name: String, caption: String,
                          onClickCallback: ReactEventI => Unit,
                          isLoading: Boolean, style: CssStyle)

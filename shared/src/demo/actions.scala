@@ -15,5 +15,4 @@ object UserAction{
   }
 }
 
-
 sealed trait AjaxAction extends Action

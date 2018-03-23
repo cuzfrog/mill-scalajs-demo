@@ -2,7 +2,7 @@ import mill._
 import mill.scalalib._
 import mill.scalajslib._
 
-trait CommonConfig extends ScalaModule {
+trait AbstractModule extends ScalaModule {
   final def scalaVersion = "2.12.4"
 
   private final def sharedSources = T.sources {
@@ -20,11 +20,13 @@ trait CommonConfig extends ScalaModule {
 
   override def ivyDeps = Agg(
     ivy"com.typesafe.play::play-json::2.6.9",
-    ivy"io.suzaku::diode::1.1.2"
+    ivy"io.suzaku::diode::1.1.3",
+    ivy"com.github.julien-truffaut::monocle-core::1.5.0",
+    ivy"com.github.julien-truffaut::monocle-macro::1.5.0"
   )
 }
 
-object server extends CommonConfig {
+object server extends AbstractModule {
   override final def ivyDeps = T {
     super.ivyDeps() ++ Seq(
       ivy"com.typesafe.akka::akka-http:10.1.0",
@@ -39,7 +41,7 @@ object server extends CommonConfig {
   }
 }
 
-object client extends CommonConfig with ScalaJSModule {
+object client extends AbstractModule with ScalaJSModule {
   final def scalaJSVersion = "0.6.22"
 
   override final def ivyDeps = T {
@@ -59,4 +61,4 @@ object client extends CommonConfig with ScalaJSModule {
   override final def moduleKind = T { ModuleKind.CommonJSModule }
 }
 
-object shared extends CommonConfig {}
+object shared extends AbstractModule {}

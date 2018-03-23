@@ -1,6 +1,6 @@
 package demo.validation
 
-import demo.{LoginFormModel, Model}
+import demo.Model
 
 private[demo] object ValidationContext {
   trait Validator[T <: Model]{

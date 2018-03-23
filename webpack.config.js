@@ -23,7 +23,8 @@ const config = {
       {from: 'node_modules/bulma/sass', to: 'sass/'},
       {from: 'node_modules/bulma/bulma.sass', to: 'bulma.sass'},
       {from: 'node_modules/font-awesome/css', to: 'css/'},
-      {from: 'node_modules/font-awesome/fonts', to: 'fonts/'}
+      {from: 'node_modules/font-awesome/fonts', to: 'fonts/'},
+      {from: 'client/resources/public/', to: ''}
     ])
   ],
   mode: 'development',

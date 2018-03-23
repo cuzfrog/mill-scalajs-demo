@@ -2,6 +2,8 @@ package demo
 
 import diode.react.ReactConnector
 import diode.{ActionHandler, Circuit}
+import monocle.macros.syntax.lens._
+import demo.validation.ValidationContext._
 
 object AppStore extends Circuit[RootModel] with ReactConnector[RootModel] {
   override protected def initialModel: RootModel = RootModel(
@@ -14,7 +16,10 @@ object AppStore extends Circuit[RootModel] with ReactConnector[RootModel] {
     override protected def handle = {
       case LoginFormAction.AccountInput(v) => updated(value.copy(account = v))
       case LoginFormAction.PasswordInput(v) => updated(value.copy(password = v))
-      case LoginFormAction.LoginFormSubmit => updated(value) //todo: implement submit action
+      case LoginFormAction.LoginFormSubmit => value.validate match {
+        case Some(errorMsg) => updated(value.copy(errorMsg = errorMsg))
+        case None => updated(value.copy(errorMsg = "").value.lens(_.submitButton.isLoading).modify(_ => true))
+      }
     }
   }
 
