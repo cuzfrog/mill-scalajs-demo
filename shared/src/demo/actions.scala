@@ -2,17 +2,18 @@ package demo
 
 import diode.Action
 
-trait UserInput extends Action with Product with Serializable
+sealed trait UserAction extends Action with Product with Serializable
 
-object UserInput{
+object UserAction{
 
-  trait LoginFormInput extends UserInput
+  sealed trait LoginFormAction extends UserAction
 
-  object LoginFormInput{
-    final case class AccountInput(value: String) extends LoginFormInput
-    final case class PasswordInput(value: String) extends LoginFormInput
+  object LoginFormAction{
+    final case class AccountInput(value: String) extends LoginFormAction
+    final case class PasswordInput(value: String) extends LoginFormAction
+    final case object LoginFormSubmit extends LoginFormAction
   }
 }
 
 
-trait AjaxAction extends Action
+sealed trait AjaxAction extends Action

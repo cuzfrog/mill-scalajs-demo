@@ -1,14 +1,15 @@
 package demo.component
 
-import demo.UserInput.LoginFormInput
+import demo.UserAction.LoginFormAction
 import sri.react._
 import sri.web.vdom.tagsPrefix_<^._
 
 final class LoginForm extends ComponentP[LoginForm.Props] {
   override def render(): ReactRenders = {
     <.div()(
-      TextInput("account-input", _.loginForm.account, LoginFormInput.AccountInput),
-      TextInput("password-input", _.loginForm.password, LoginFormInput.PasswordInput)
+      TextInput("account-input", _.loginForm.account, LoginFormAction.AccountInput),
+      TextInput("password-input", _.loginForm.password, LoginFormAction.PasswordInput),
+      Button("login-submit-btn", "Submit", _.loginForm.submitButton, LoginFormAction.LoginFormSubmit)
     )
   }
 }

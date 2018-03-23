@@ -1,6 +1,6 @@
 package demo.component
 
-import demo.{AppStore, RootModel, UserInput}
+import demo.{AppStore, RootModel, UserAction}
 import sri.react._
 import sri.web.vdom.tagsPrefix_<^._
 
@@ -20,7 +20,7 @@ object TextInput {
 
   final case class Pros(name: String, value: String, onChangeCallback: ReactEventI => Unit, style: CssStyle)
 
-  def apply(name: String, locator: RootModel => String, action: String => UserInput, style: CssStyle = CssStyle.empty): ReactElement = {
+  def apply(name: String, locator: RootModel => String, action: String => UserAction, style: CssStyle = CssStyle.empty): ReactElement = {
     AppStore.connect(locator) { proxy =>
       def value: String = proxy.apply()
       val onChangeCallback: ReactEventI => Unit = (event: ReactEventI) => {

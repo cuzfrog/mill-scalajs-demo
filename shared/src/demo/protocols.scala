@@ -1,6 +1,6 @@
 package demo
 
-trait Message extends Product with Serializable{
+sealed trait Message extends Product with Serializable{
   def userId: Long
 }
 
