@@ -9,7 +9,7 @@ const config = {
   },
   output: {
     filename: '[name].bundle.js',
-    path: path.resolve(__dirname, './server/resources/assets') //overridden in serverSettings
+    path: path.resolve(__dirname, './client/test/resources/assets')
   },
   module: {
     rules: [
@@ -20,11 +20,17 @@ const config = {
   plugins: [
     new CopyWebpackPlugin([
       {from: 'node_modules/bulma/css', to: 'css/'},
+      {from: 'node_modules/bulma/sass', to: 'sass/'},
+      {from: 'node_modules/bulma/bulma.sass', to: 'bulma.sass'},
       {from: 'node_modules/font-awesome/css', to: 'css/'},
-      {from: 'node_modules/font-awesome/fonts', to: 'fonts/'},
+      {from: 'node_modules/font-awesome/fonts', to: 'fonts/'}
     ])
   ],
-  mode: 'development'
+  mode: 'development',
+  devServer: {
+      contentBase: "./client/test/resources/",
+      watchContentBase: true
+  },
 };
 
 module.exports = config;

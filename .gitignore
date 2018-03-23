@@ -5,3 +5,4 @@ out/
 *.log
 node_modules/
 server/resources/assets/*
+client/test/resources/assets/*
