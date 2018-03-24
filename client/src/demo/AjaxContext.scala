@@ -6,6 +6,7 @@ import org.scalajs.dom.ext.Ajax
 
 import scala.concurrent.Future
 import scala.scalajs.concurrent.JSExecutionContext.Implicits.queue
+import scala.util.Try
 
 private trait AjaxSender[T <: AjaxRequest] {
   def send(request: T)(implicit session: Session): Future[AjaxResponse]
@@ -22,8 +23,12 @@ private object AjaxContext {
   implicit val dataAjaxSender: AjaxSender[AjaxRequest] = new AjaxSender[AjaxRequest] {
     override def send(request: AjaxRequest)(implicit session: Session): Future[AjaxResponse] = {
       println(s"Send request: ${request.nextAction}")
-      val future = Ajax.post(
-        "api/request", data = request.serialize, headers = session.toHttpHeader)
+      val future = Try {
+        Ajax.post(
+          "api/request", data = request.serialize, headers = session.toHttpHeader, timeout = 500)
+      }.recover{case e => Future.failed(e)}.get
+
+      println(s"Response future created: $future")
       future.map(_.responseText.deserilize[AjaxResponse])
     }
   }

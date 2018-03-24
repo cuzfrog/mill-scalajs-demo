@@ -7,7 +7,7 @@ private object CssStyle {
   val empty: CssStyle = CssStyle()
 
   sealed trait Color{
-    override def toString: String = s"is-${this.toString.toLowerCase}"
+    override def toString: String = s"is-${this.getClass.getSimpleName.toLowerCase}"
   }
   object Color{
     case object Success extends Color

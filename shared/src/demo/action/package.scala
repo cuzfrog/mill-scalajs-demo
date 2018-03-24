@@ -14,6 +14,7 @@ package object action {
   private[action] implicit val actionWrites: Writes[Action] = (action: Action) => {
     val actionClass = JsString(action.getClass.getName)
     val content = action match {
+      case action: AjaxAction => Json.toJson(action.nextAction)
       case action: Authenticate => Json.toJson(action.credential)
       case unserializable => throw new IllegalArgumentException(s"Unserializable action: $unserializable")
     }
@@ -27,6 +28,8 @@ package object action {
     val actionClass = (json \ ACTION_CLASS_PATH).get.validate[String]
     def content = (json \ ACTION_CONTENT_PATH).get
     actionClass.flatMap {
+      case clazz if clazz == classOf[AjaxRequest].getName => content.validate[Action].map(AjaxRequest(_))
+      case clazz if clazz == classOf[AjaxResponse].getName => content.validate[Action].map(AjaxResponse(_))
       case clazz if clazz == classOf[Authenticate].getName => content.validate[Credential].map(Authenticate)
       case unserializable => throw new IllegalArgumentException(s"Unserializable action: $unserializable")
     }
