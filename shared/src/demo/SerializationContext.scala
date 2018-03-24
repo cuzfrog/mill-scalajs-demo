@@ -2,7 +2,7 @@ package demo
 
 import demo.action._
 
-trait Serializer[T <: AjaxRequest] {
+trait Serializer[T <: AjaxAction] {
   def serialize(request: T): String
 }
 
@@ -11,9 +11,9 @@ trait Deserializer[T <: AjaxAction] {
 }
 
 object SerializationContext {
-  implicit final class SerializationOps[T <: AjaxRequest](request: T)(implicit serializer: Serializer[T]) {
+  implicit final class SerializationOps[T <: AjaxAction](obj: T)(implicit serializer: Serializer[T]) {
     /** Serialize this instance to String, format depends underlying implementation, which could be JSON or others. */
-    def serialize: String = serializer.serialize(request)
+    def serialize: String = serializer.serialize(obj)
   }
 
   implicit final class DeserializationOps(data: String) {

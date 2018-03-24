@@ -1,10 +1,12 @@
 package demo
 
-import demo.model.LoginFormData
+import demo.model.Credential
 import diode.Action
 import play.api.libs.json._
 
 package object action {
+
+  case object DummyAction extends Action with Product with Serializable
 
   private final val ACTION_CLASS_PATH: String = "action-class"
   private final val ACTION_CONTENT_PATH: String = "action-content"
@@ -25,7 +27,7 @@ package object action {
     val actionClass = (json \ ACTION_CLASS_PATH).get.validate[String]
     def content = (json \ ACTION_CONTENT_PATH).get
     actionClass.flatMap {
-      case clazz if clazz == classOf[Authenticate].getName => content.validate[LoginFormData].map(Authenticate)
+      case clazz if clazz == classOf[Authenticate].getName => content.validate[Credential].map(Authenticate)
       case unserializable => throw new IllegalArgumentException(s"Unserializable action: $unserializable")
     }
   }

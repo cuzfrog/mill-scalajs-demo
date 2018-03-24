@@ -1,5 +1,6 @@
 package demo.model
 
+import demo.reducer.ServerReducers
 import diode.Circuit
 
 object ServerStore extends Circuit[ServerRootModel] {
@@ -7,5 +8,5 @@ object ServerStore extends Circuit[ServerRootModel] {
     sessions = Seq.empty
   )
 
-  override protected def actionHandler = composeHandlers(demo.reducer.getReducers: _*)
+  override protected def actionHandler = composeHandlers(ServerReducers.getReducers: _*)
 }

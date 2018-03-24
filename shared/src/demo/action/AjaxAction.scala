@@ -20,12 +20,14 @@ object AjaxRequest{
   private implicit val requestReads: Reads[AjaxRequest] = Json.reads[AjaxRequest]
 }
 object AjaxResponse{
+  implicit val serializer: Serializer[AjaxResponse] = (request: AjaxResponse) => Json.toJson(request).as[String]
   implicit val deserializer: Deserializer[AjaxResponse] = (responseText: String) =>
     Json.fromJson[AjaxResponse](Json.parse(responseText))
       .recoverTotal(err => AjaxResponse(AjaxError(err.errors.toString())))
 
+  private implicit val requestWrites: Writes[AjaxResponse] = Json.writes[AjaxResponse]
   private implicit val responseReads: Reads[AjaxResponse] = Json.reads[AjaxResponse]
 }
 
-final case class StoreSession(session: Session, nextAction: Action) extends AjaxAction
+final case class StoreSession(session: Session) extends AjaxAction
 final case class AjaxError(log: String) extends AjaxAction
