@@ -1,23 +1,25 @@
 package demo.reducer
 
+import demo.ValidationContext._
+import demo._
+import diode.{ActionHandler, Effect}
 import monocle.macros.syntax.lens._
-import demo.validation.ValidationContext._
-import demo.{AppStore, LoginFormModel, RootModel, UserAction}
-import diode.ActionHandler
-import UserAction.LoginFormAction._
 
-private[demo] final class LoinFormReducer extends ActionHandler[RootModel, LoginFormModel](AppStore.zoomTo(_.loginForm)){
+private final class LoinFormReducer extends ActionHandler[RootModel, LoginFormModel](AppStore.zoomTo(_.loginForm)) {
+
+  import UserAction.LoginFormAction._
+  import demo.ValidationAction.LoginFormValidationAction._
 
   override protected def handle = {
-    case AccountInput(v) => updated(value.copy(account = v))
-    case PasswordInput(v) => updated(value.copy(password = v))
-    case LoginFormSubmit => value.validate match {
-      case errorMsg if errorMsg.nonEmpty =>
-        println(s"validation failed: $errorMsg")
-        updated(value.copy(errorMsg = errorMsg))
-      case _ =>
-        println("validation successful")
-        updated(value.copy(errorMsg = Seq.empty).value.lens(_.submitButton.isLoading).modify(_ => true))
-    }
+    case AccountInput(v) => updated(value.lens(_.data.account).set(v))
+    case PasswordInput(v) => updated(value.lens(_.data.password).set(v))
+    case SubmitButtonClick =>
+      updated(value.lens(_.submitButton.isLoading).set(true), Effect(value.validate))
+    case LoggedInClear =>
+      updated(value.lens(_.data.password).set("").lens(_.submitButton.isLoading).set(false))
+
+    case Valid(nextAction) => updated(value.copy(accountErrMsg = "", passwordErrMsg = ""), Effect.action(nextAction))
+    case InvalidAccount(errMsg) => updated(value.copy(accountErrMsg = errMsg), Effect.action(LoggedInClear))
+    case InvalidPassword(errMsg) => updated(value.copy(passwordErrMsg = errMsg), Effect.action(LoggedInClear))
   }
 }

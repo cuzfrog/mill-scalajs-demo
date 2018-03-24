@@ -1,17 +1,16 @@
 package demo
 
-import demo.reducer.LoinFormReducer
+import demo.reducer.Reducers
 import diode.Circuit
 import diode.react.ReactConnector
 
 object AppStore extends Circuit[RootModel] with ReactConnector[RootModel] {
   override protected def initialModel: RootModel = RootModel(
-    greetingWords = "welcome!",
+    session = Session(),
+    navigation = NavigationModel(),
     loginForm = LoginFormModel()
   )
 
-  private val loginFormReducer = new LoinFormReducer()
-
-  override protected def actionHandler: HandlerFunction = composeHandlers(loginFormReducer)
+  override protected def actionHandler: HandlerFunction = composeHandlers(Reducers.getReducers: _*)
 }
 

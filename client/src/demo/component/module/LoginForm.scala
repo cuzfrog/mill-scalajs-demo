@@ -9,9 +9,9 @@ import sri.web.vdom.tagsPrefix_<^._
 private[component] final class LoginForm extends ComponentP[LoginForm.Props] {
   override def render(): ReactRenders = {
     <.div()(
-      EmailTextInput("login-account-input", _.loginForm.account, action.AccountInput),
-      PasswordTextInput("login-password-input", _.loginForm.password, action.PasswordInput),
-      PrimaryButton("login-submit-btn", "Submit", _.loginForm.submitButton, action.LoginFormSubmit)
+      EmailTextInput("login-account-input", _.loginForm.data.account, action.AccountInput),
+      PasswordTextInput("login-password-input", _.loginForm.data.password, action.PasswordInput),
+      PrimaryButton("login-submit-btn", "Submit", _.loginForm.submitButton, action.SubmitButtonClick)
     )
   }
 }
