@@ -6,8 +6,8 @@ trait Serializer[T <: AjaxRequest] {
   def serialize(request: T): String
 }
 
-trait Deserializer[T <: AjaxResponse] {
-  def deserialize(responseText: String): T
+trait Deserializer[T <: AjaxAction] {
+  def deserialize(data: String): T
 }
 
 object SerializationContext {
@@ -16,7 +16,7 @@ object SerializationContext {
     def serialize: String = serializer.serialize(request)
   }
 
-  implicit final class DeserializationOps(responseText: String) {
-    def deserilize[T <: AjaxResponse](implicit deserializer: Deserializer[T]): T = deserializer.deserialize(responseText)
+  implicit final class DeserializationOps(data: String) {
+    def deserilize[T <: AjaxAction](implicit deserializer: Deserializer[T]): T = deserializer.deserialize(data)
   }
 }

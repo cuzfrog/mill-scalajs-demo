@@ -2,6 +2,7 @@ package demo.model
 
 import demo.Validator
 import demo.action._
+import play.api.libs.json.{Json, Reads, Writes}
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
@@ -24,3 +25,7 @@ object LoginFormModel {
 final case class LoginFormData(account: String = "guest@domain.com",
                                password: String = "00000000") extends Data
 
+object LoginFormData{
+  implicit val jsonWrites: Writes[LoginFormData] = Json.writes[LoginFormData]
+  implicit val jsonReads: Reads[LoginFormData] = Json.reads[LoginFormData]
+}

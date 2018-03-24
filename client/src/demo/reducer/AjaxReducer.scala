@@ -13,6 +13,10 @@ private[reducer]  final class AjaxReducer extends ActionHandler[RootModel, Sessi
       case AjaxResponse(nextAction) => effectOnly(Effect.action(nextAction))
 
       case StoreSession(session, nextAction) => updated(session, Effect.action(nextAction))
+
+      case AjaxError(log) =>
+        println(log)
+        noChange
     }
   }
 }
