@@ -11,7 +11,9 @@ final case class RootModel(session: Session,
                            loginForm: LoginFormModel) extends Model
 
 final case class NavigationModel(currentPage: Page = Page.Login) extends Model
-final case class Session(sessionId: Long = -1L) extends Model
+final case class Session(sessionId: Long = -1L) extends Model{
+  def toHttpHeader: Map[String, String] = ???
+}
 
 final case class ButtonModel(isLoading: Boolean = false) extends Model
 

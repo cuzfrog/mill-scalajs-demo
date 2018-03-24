@@ -10,13 +10,23 @@ private object UserAction{
     final case class PasswordInput(value: String) extends LoginFormAction
     final case object SubmitButtonClick extends LoginFormAction
     final case object LoggedInClear extends LoginFormAction
+    final case class LoginFailed(msg: String) extends LoginFormAction
   }
 }
 
 private sealed trait AjaxAction extends Action with Product with Serializable
 private object AjaxAction{
   final case class AjaxRequest(data: Data) extends AjaxAction
-  final case class AjaxResponse(session: Session, nextAction: Action) extends AjaxAction
+  final case class AjaxResponse(nextAction: Action) extends AjaxAction
+
+  object AjaxRequest{
+    implicit val serializer: Serializer[AjaxRequest] = ???
+  }
+  object AjaxResponse{
+    implicit val deserializer: Deserializer[AjaxResponse] = ???
+  }
+
+  final case class StoreSession(session: Session, nextAction: Action) extends AjaxAction
 }
 
 private sealed trait ValidationAction extends Action with Product with Serializable

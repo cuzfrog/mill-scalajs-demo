@@ -1,26 +1,27 @@
 package demo
 
-import demo.AjaxAction.AjaxResponse
-import demo.NavigationAction.Login
+import demo.AjaxAction.{AjaxRequest, AjaxResponse}
+import org.scalajs.dom.ext.Ajax
 
 import scala.concurrent.Future
 import scala.scalajs.concurrent.JSExecutionContext.Implicits.queue
 
-private trait AjaxSender[T <: Data] {
-  def send(data: T): Future[AjaxAction]
+private trait AjaxSender[T <: AjaxRequest] {
+  def send(request: T)(implicit session: Session): Future[AjaxResponse]
 }
 
 private object AjaxContext {
 
-  implicit final class AjaxOps[T <: Data](data: T)(implicit ajaxSender: AjaxSender[T]) {
-    def ajaxSend(session: Session): Future[AjaxAction] = ajaxSender.send(data)
+  implicit final class AjaxOps[T <: AjaxRequest](request: T)(implicit ajaxSender: AjaxSender[T]) {
+    def ajaxSend(session: Session): Future[AjaxResponse] = ajaxSender.send(request)(session)
   }
 
-  implicit val loginFormDataAjaxSender: AjaxSender[LoginFormData] = (data: LoginFormData) => Future {
-    AjaxResponse(Session(4532L), Login) //todo: implement
-  }
+  import SerializationContext._
 
-  implicit val dataAjaxSender: AjaxSender[Data] = {
-    case loginFormData: LoginFormData => loginFormDataAjaxSender.send(loginFormData)
+  implicit val dataAjaxSender: AjaxSender[AjaxRequest] = new AjaxSender[AjaxRequest] {
+    override def send(request: AjaxRequest)(implicit session: Session): Future[AjaxResponse] = {
+      val future = Ajax.post("api/request", data = request.serialize, headers = session.toHttpHeader)
+      future.map(_.responseText.deserilize[AjaxResponse])
+    }
   }
 }
