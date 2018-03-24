@@ -2,7 +2,7 @@ package demo.component.button
 
 import demo.action.UserAction
 import demo.component.CssStyle
-import demo.model.{AppStore, ButtonModel, RootModel}
+import demo.model.{ClientStore, ButtonModel, ClientRootModel}
 import sri.react._
 import sri.web.vdom.tagsPrefix_<^._
 
@@ -27,9 +27,9 @@ private object Button {
                          isLoading: Boolean, style: CssStyle)
 
   def apply(name: String, caption: String,
-            locator: RootModel => ButtonModel, action: UserAction,
+            locator: ClientRootModel => ButtonModel, action: UserAction,
             style: CssStyle = CssStyle.empty): ReactElement = {
-    AppStore.connect(locator) { proxy =>
+    ClientStore.connect(locator) { proxy =>
       def model = proxy()
       val onClickCallback = (event: ReactEventI) => {
         event.preventDefault()

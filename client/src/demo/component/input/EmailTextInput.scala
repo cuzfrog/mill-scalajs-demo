@@ -3,11 +3,11 @@ package demo.component.input
 import demo.action.UserAction
 import demo.component.CssStyle
 import demo.component.element._
-import demo.model.RootModel
+import demo.model.ClientRootModel
 import sri.react.ReactElement
 
 private[component] object EmailTextInput {
-  def apply(name: String, locator: RootModel => String,
+  def apply(name: String, locator: ClientRootModel => String,
             action: String => UserAction): ReactElement =
     Field(
       Control("has-icons-left")(

@@ -9,7 +9,8 @@ const config = {
   },
   output: {
     filename: '[name].bundle.js',
-    path: path.resolve(__dirname, './client/test/resources/assets')
+    //path: path.resolve(__dirname, './client/test/resources/assets')
+    path: path.resolve(__dirname, './server/resources/assets')
   },
   module: {
     rules: [

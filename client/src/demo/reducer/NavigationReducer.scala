@@ -1,10 +1,10 @@
 package demo.reducer
 
 import demo.Page
-import demo.model.{AppStore, NavigationModel, RootModel}
+import demo.model.{ClientStore, NavigationModel, ClientRootModel}
 import diode.{ActionHandler, Effect}
 
-private[reducer] final class NavigationReducer extends ActionHandler[RootModel, NavigationModel](AppStore.zoomTo(_.navigation)) {
+private[reducer] final class NavigationReducer extends ActionHandler[ClientRootModel, NavigationModel](ClientStore.zoomTo(_.navigation)) {
   import demo.action._
 
   override protected def handle = {

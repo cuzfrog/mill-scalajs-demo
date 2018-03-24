@@ -1,6 +1,6 @@
 package demo
 
-import demo.model.AppStore.HandlerFunction
+import demo.model.ClientStore.HandlerFunction
 
 import scala.concurrent.ExecutionContextExecutor
 

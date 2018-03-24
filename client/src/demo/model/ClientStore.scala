@@ -4,8 +4,8 @@ import demo.reducer
 import diode.Circuit
 import diode.react.ReactConnector
 
-object AppStore extends Circuit[RootModel] with ReactConnector[RootModel] {
-  override protected def initialModel: RootModel = RootModel(
+object ClientStore extends Circuit[ClientRootModel] with ReactConnector[ClientRootModel] {
+  override protected def initialModel: ClientRootModel = ClientRootModel(
     session = Session(),
     navigation = NavigationModel(),
     loginForm = LoginFormModel()

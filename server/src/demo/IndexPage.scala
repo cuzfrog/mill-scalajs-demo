@@ -10,6 +10,7 @@ private object IndexPage {
         scalatags.Text.tags2.title("mill-scalajs-demo"),
         link(rel := "stylesheet", href := "assets/css/bulma.css"),
         link(rel := "stylesheet", href := "assets/css/font-awesome.min.css"),
+        link(rel := "stylesheet", href := "assets/css/custom.css"),
         script(`type` := "text/javascript", src := "assets/vendor.bundle.js")
       ),
       body(

@@ -3,11 +3,11 @@ package demo.reducer
 import demo.ValidationContext._
 import demo.action._
 import demo.action.{UserAction, ValidationAction}
-import demo.model.{AppStore, LoginFormModel, RootModel}
+import demo.model.{ClientStore, LoginFormModel, ClientRootModel}
 import diode.{ActionHandler, Effect}
 import monocle.macros.syntax.lens._
 
-private[reducer] final class LoinFormReducer extends ActionHandler[RootModel, LoginFormModel](AppStore.zoomTo(_.loginForm)) {
+private[reducer] final class LoinFormReducer extends ActionHandler[ClientRootModel, LoginFormModel](ClientStore.zoomTo(_.loginForm)) {
 
   import LoginFormAction._
   import LoginFormValidationAction._

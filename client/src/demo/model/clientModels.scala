@@ -1,20 +1,11 @@
 package demo.model
 
-import demo._
+import demo.Page
 
-trait Model extends Product with Serializable
-trait Data extends Model
-
-final case class RootModel(session: Session,
+final case class ClientRootModel(session: Session,
                            navigation: NavigationModel,
                            loginForm: LoginFormModel) extends Model
 
 final case class NavigationModel(currentPage: Page = Page.Login) extends Model
 
-final case class Session(sessionId: Long = -1L) extends Model{
-  def toHttpHeader: Map[String, String] = ???
-}
-
 final case class ButtonModel(isLoading: Boolean = false) extends Model
-
-
