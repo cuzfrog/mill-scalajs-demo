@@ -9,6 +9,6 @@ object LoginFormAction{
   final case class AccountInput(value: String) extends LoginFormAction
   final case class PasswordInput(value: String) extends LoginFormAction
   final case object SubmitButtonClick extends LoginFormAction
-  final case object LoggedInClear extends LoginFormAction
+  final case object LoginClear extends LoginFormAction
   final case class LoginFailed(msg: String) extends LoginFormAction
 }

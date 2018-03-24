@@ -21,7 +21,9 @@ private object AjaxContext {
 
   implicit val dataAjaxSender: AjaxSender[AjaxRequest] = new AjaxSender[AjaxRequest] {
     override def send(request: AjaxRequest)(implicit session: Session): Future[AjaxResponse] = {
-      val future = Ajax.post("api/request", data = request.serialize, headers = session.toHttpHeader)
+      println(s"Send request: ${request.nextAction}")
+      val future = Ajax.post(
+        "api/request", data = request.serialize, headers = session.toHttpHeader)
       future.map(_.responseText.deserilize[AjaxResponse])
     }
   }

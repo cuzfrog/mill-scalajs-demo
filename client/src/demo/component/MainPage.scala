@@ -7,7 +7,7 @@ import sri.web.vdom.tagsPrefix_<^._
 
 final class MainPage extends ComponentP[MainPage.Props] {
   override def render(): ReactRenders = <.div(^.id := "page-wrapper")(
-    Hero(title = "Scala.js", subtitle = "Mill cross compilation demonstration"),
+    Hero(title = "Scala.js", subtitle = "Js/Jvm cross compilation demonstration"),
     PageContent(
       LoginForm()
     ),

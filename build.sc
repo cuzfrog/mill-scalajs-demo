@@ -20,6 +20,7 @@ trait AbstractModule extends ScalaModule {
 
   override def ivyDeps = Agg(
     //ivy"com.softwaremill.macwire::macros::2.3.1",
+    ivy"biz.enef::slogging::0.6.1",
     ivy"com.typesafe.play::play-json::2.6.9",
     ivy"io.suzaku::diode::1.1.3",
     ivy"com.github.julien-truffaut::monocle-core::1.5.0",

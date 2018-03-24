@@ -15,5 +15,10 @@ private[route] object HomeRoute {
       encodeResponse {
         getFromResource(s"assets/$file")
       }
+    } ~
+    path("favicon.ico") {
+      encodeResponse {
+        getFromResource("favicon.ico")
+      }
     }
 }

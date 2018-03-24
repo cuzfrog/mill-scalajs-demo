@@ -1,5 +1,6 @@
 package demo.component.element
 
+import demo.component.CssStyle
 import sri.react.ReactElement
 import sri.web.vdom.tagsPrefix_<^._
 
@@ -35,8 +36,22 @@ private[component] object Control {
   def apply(style: String = "")(children: ReactElement*): ReactElement = <.p(^.className := s"control $style")(children: _*)
 }
 
+private[component] object HelpInfo {
+  def apply(style: String = "")(text: String): ReactElement = <.p(^.className := s"help $style")(text)
+}
+
 private[component] object Icon {
   def apply(style: String = "")(icon: String): ReactElement = <.span(^.className := s"icon $style")(
     <.i(^.className := s"fa $icon")()
   )
+}
+
+private[component] object Message{
+  def apply(color: CssStyle.Color)(text: String): ReactElement = <.article(^.className := s"message $color")(
+    <.div(^.className := "message-body")(text)
+  )
+}
+
+private[component] object EmptyDiv{
+  def apply(): ReactElement = <.div()()
 }
