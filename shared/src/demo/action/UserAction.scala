@@ -2,9 +2,9 @@ package demo.action
 
 import diode.Action
 
-private[demo] sealed trait UserAction extends Action with Product with Serializable
+sealed trait UserAction extends Action with Product with Serializable
 
-private[demo] object UserAction {
+object UserAction {
   sealed trait LoginFormAction extends UserAction
   object LoginFormAction{
     final case class AccountInput(value: String) extends LoginFormAction

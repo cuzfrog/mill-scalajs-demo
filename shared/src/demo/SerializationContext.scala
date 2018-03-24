@@ -2,15 +2,15 @@ package demo
 
 import demo.action.AjaxAction.{AjaxRequest, AjaxResponse}
 
-private[demo] trait Serializer[T <: AjaxRequest] {
+trait Serializer[T <: AjaxRequest] {
   def serialize(request: T): String
 }
 
-private[demo] trait Deserializer[T <: AjaxResponse] {
+trait Deserializer[T <: AjaxResponse] {
   def deserialize(responseText: String): T
 }
 
-private[demo] object SerializationContext {
+object SerializationContext {
   implicit final class SerializationOps[T <: AjaxRequest](request: T)(implicit serializer: Serializer[T]) {
     /** Serialize this instance to String, format depends underlying implementation, which could be JSON or others. */
     def serialize: String = serializer.serialize(request)

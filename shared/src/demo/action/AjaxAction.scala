@@ -4,9 +4,9 @@ import demo.model.Session
 import demo.{Deserializer, Serializer}
 import diode.Action
 
-private[demo] sealed trait AjaxAction extends Action with Product with Serializable
+sealed trait AjaxAction extends Action with Product with Serializable
 
-private[demo] object AjaxAction {
+object AjaxAction {
   final case class AjaxRequest(nextAction: Action) extends AjaxAction
   final case class AjaxResponse(nextAction: Action) extends AjaxAction
 
