@@ -4,6 +4,4 @@ import diode.Action
 
 sealed trait NavigationAction extends Action with Product with Serializable
 
-object NavigationAction {
-  final case object Login extends NavigationAction
-}
+case object LoginAction extends NavigationAction

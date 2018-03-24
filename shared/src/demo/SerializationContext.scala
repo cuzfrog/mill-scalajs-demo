@@ -1,6 +1,6 @@
 package demo
 
-import demo.action.AjaxAction.{AjaxRequest, AjaxResponse}
+import demo.action._
 
 trait Serializer[T <: AjaxRequest] {
   def serialize(request: T): String

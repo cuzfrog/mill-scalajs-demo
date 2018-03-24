@@ -1,7 +1,7 @@
 package demo.reducer
 
 import demo.ValidationContext._
-import demo.action.UserAction.LoginFormAction
+import demo.action._
 import demo.action.{UserAction, ValidationAction}
 import demo.model.{AppStore, LoginFormModel, RootModel}
 import diode.{ActionHandler, Effect}
@@ -9,8 +9,8 @@ import monocle.macros.syntax.lens._
 
 private[reducer] final class LoinFormReducer extends ActionHandler[RootModel, LoginFormModel](AppStore.zoomTo(_.loginForm)) {
 
-  import UserAction.LoginFormAction._
-  import demo.action.ValidationAction.LoginFormValidationAction._
+  import LoginFormAction._
+  import LoginFormValidationAction._
 
   override protected def handle = {
     case action: LoginFormAction => action match {

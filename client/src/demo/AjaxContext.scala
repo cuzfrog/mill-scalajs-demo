@@ -1,6 +1,6 @@
 package demo
 
-import demo.action.AjaxAction.{AjaxRequest, AjaxResponse}
+import demo.action._
 import demo.model.Session
 import org.scalajs.dom.ext.Ajax
 

@@ -2,7 +2,7 @@ package demo.reducer
 
 import demo.AjaxContext._
 import demo.action.AjaxAction
-import demo.action.AjaxAction.{AjaxRequest, AjaxResponse, StoreSession}
+import demo.action._
 import demo.model.{AppStore, RootModel, Session}
 import diode.{ActionHandler, Effect}
 

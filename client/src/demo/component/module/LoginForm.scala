@@ -1,6 +1,6 @@
 package demo.component.module
 
-import demo.action.UserAction.{LoginFormAction => action}
+import demo.action.{LoginFormAction => action}
 import demo.component.button.PrimaryButton
 import demo.component.input.{EmailTextInput, PasswordTextInput}
 import sri.react._
