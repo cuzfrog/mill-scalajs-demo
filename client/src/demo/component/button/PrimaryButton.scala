@@ -1,8 +1,9 @@
 package demo.component.button
 
+import demo.action.UserAction
 import demo.component.CssStyle
 import demo.component.element.Control
-import demo.{ButtonModel, RootModel, UserAction}
+import demo.model.{ButtonModel, RootModel}
 import sri.react.ReactElement
 
 

@@ -1,7 +1,8 @@
 package demo.component.button
 
-import demo._
+import demo.action.UserAction
 import demo.component.CssStyle
+import demo.model.{AppStore, ButtonModel, RootModel}
 import sri.react._
 import sri.web.vdom.tagsPrefix_<^._
 

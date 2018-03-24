@@ -1,8 +1,9 @@
 package demo.component.input
 
-import demo.{RootModel, UserAction}
+import demo.action.UserAction
 import demo.component.CssStyle
 import demo.component.element.{Control, Field, Icon}
+import demo.model.RootModel
 import sri.react.ReactElement
 
 private[component] object PasswordTextInput {

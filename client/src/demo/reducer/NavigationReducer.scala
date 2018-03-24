@@ -1,11 +1,13 @@
 package demo.reducer
 
-import demo.NavigationAction.Login
-import demo.UserAction.LoginFormAction
-import demo.{AppStore, NavigationModel, Page, RootModel}
+import demo.Page
+import demo.model.{AppStore, NavigationModel, RootModel}
 import diode.{ActionHandler, Effect}
 
-private final class NavigationReducer extends ActionHandler[RootModel, NavigationModel](AppStore.zoomTo(_.navigation)){
+private[reducer] final class NavigationReducer extends ActionHandler[RootModel, NavigationModel](AppStore.zoomTo(_.navigation)) {
+  import demo.action.NavigationAction._
+  import demo.action.UserAction.LoginFormAction
+
   override protected def handle = {
     case Login =>
       println("navigation Login!")

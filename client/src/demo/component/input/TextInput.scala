@@ -1,7 +1,8 @@
 package demo.component.input
 
+import demo.action.UserAction
 import demo.component.CssStyle
-import demo.{AppStore, RootModel, UserAction}
+import demo.model.{AppStore, RootModel}
 import sri.react._
 import sri.web.vdom.tagsPrefix_<^._
 

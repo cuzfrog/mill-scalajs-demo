@@ -1,6 +1,6 @@
-package demo
+package demo.model
 
-import demo.reducer.Reducers
+import demo.reducer
 import diode.Circuit
 import diode.react.ReactConnector
 
@@ -11,6 +11,6 @@ object AppStore extends Circuit[RootModel] with ReactConnector[RootModel] {
     loginForm = LoginFormModel()
   )
 
-  override protected def actionHandler: HandlerFunction = composeHandlers(Reducers.getReducers: _*)
+  override protected def actionHandler: HandlerFunction = composeHandlers(reducer.getReducers: _*)
 }
 

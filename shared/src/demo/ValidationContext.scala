@@ -1,5 +1,8 @@
 package demo
 
+import demo.action.ValidationAction
+import demo.model.Model
+
 import scala.concurrent.Future
 
 private[demo] trait Validator[T <: Model]{

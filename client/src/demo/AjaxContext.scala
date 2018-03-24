@@ -1,6 +1,7 @@
 package demo
 
-import demo.AjaxAction.{AjaxRequest, AjaxResponse}
+import demo.action.AjaxAction.{AjaxRequest, AjaxResponse}
+import demo.model.Session
 import org.scalajs.dom.ext.Ajax
 
 import scala.concurrent.Future
