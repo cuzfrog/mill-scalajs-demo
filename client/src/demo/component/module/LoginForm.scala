@@ -3,14 +3,11 @@ package demo.component.module
 import demo.action.{LoginFormAction => action}
 import demo.component.CssStyle.Color
 import demo.component.button.PrimaryButton
-import demo.component.element.{Container, EmptyDiv, Message}
+import demo.component.element.{EmptyDiv, Message}
 import demo.component.input.{EmailTextInput, PasswordTextInput}
 import demo.model.{ClientStore, LoginFormModel}
 import sri.react._
 import sri.web.vdom.tagsPrefix_<^._
-
-import scala.scalajs.js
-import js.JSConverters._
 
 private[component] final class LoginForm extends ComponentP[LoginForm.Props] {
   override def render(): ReactRenders = {
@@ -22,9 +19,12 @@ private[component] final class LoginForm extends ComponentP[LoginForm.Props] {
     )
   }
 
-  private def messageBlock(): ReactElement = Message(Color.Danger)(
-    props.loginFormModel.errMsg.map{case (k, msg) => s"$k: $msg"}.mkString(System.lineSeparator())
-  )
+  private def messageBlock(): ReactElement = {
+    if (props.loginFormModel.errMsg.isEmpty) EmptyDiv()
+    else Message(Color.Danger)(
+      props.loginFormModel.errMsg.map { case (k, msg) => s"$k: $msg" }.mkString(System.lineSeparator())
+    )
+  }
 }
 
 private[component] object LoginForm {

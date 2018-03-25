@@ -31,6 +31,8 @@ private[reducer] final class AuthReducer(val authService: AuthService)
       }
       effectOnly(Effect(serverNextAction))
 
-    case StoreSession(session) => updated(value :+ session)
+    case StoreSession(session) =>
+      println(s"Add session: $session")
+      updated(value :+ session)
   }
 }

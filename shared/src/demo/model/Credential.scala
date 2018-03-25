@@ -16,7 +16,7 @@ object Credential {
 
   import LoginFormValidationAction._
 
-  implicit val loginFormValidator: Validator[Credential] = (data: Credential) => Future {
+  implicit val credentialValidator: Validator[Credential] = (data: Credential) => Future {
     println(s"Validate: $data")
     if (!data.account.matches("""\w+@\w+(\.\w+)+""")) InvalidAccount("Account must be an email address.")
     else if (data.password.lengthCompare(8) < 0) InvalidPassword("Password must be at lease 8 chars")

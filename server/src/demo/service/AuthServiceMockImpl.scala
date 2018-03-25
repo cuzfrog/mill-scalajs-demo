@@ -12,6 +12,8 @@ private final class AuthServiceMockImpl extends AuthService {
       if(randomLong > 0) randomLong else randomLong.unary_-
     }
     Thread.sleep(500)
-    Future.successful(Some(Session(sessionId)))
+    val session = Session(sessionId)
+    println(s"Session generated: $session")
+    Future.successful(Some(session))
   }
 }
