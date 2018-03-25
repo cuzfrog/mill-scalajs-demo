@@ -7,6 +7,8 @@ import diode.{ActionHandler, Effect}
 import monocle.macros.syntax.lens._
 import monocle.function.At.at
 
+import scala.concurrent.Future
+
 private[reducer] final class LoinFormReducer extends ActionHandler[ClientRootModel, LoginFormModel](ClientStore.zoomTo(_.loginForm)) {
 
   import LoginFormAction._
@@ -17,7 +19,10 @@ private[reducer] final class LoinFormReducer extends ActionHandler[ClientRootMod
       case AccountInput(v) => updated(value.lens(_.data.account).set(v))
       case PasswordInput(v) => updated(value.lens(_.data.password).set(v))
       case SubmitButtonClick =>
-        updated(value.lens(_.submitButton.isLoading).set(true), Effect(value.data.validate))
+        val nextAction = if(value.enableClientValidation) value.data.validate else Future(Valid(value.data))
+        updated(value.lens(_.submitButton.isLoading).set(true), Effect(nextAction))
+      case EnableValidationCheckboxChange(checked) =>
+        updated(value.copy(enableClientValidation = checked))
       case LoginClear =>
         updated(value.lens(_.data.password).set("").lens(_.submitButton.isLoading).set(false))
       case LoginFailed(msg) =>

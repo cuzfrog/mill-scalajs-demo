@@ -3,8 +3,8 @@ package demo.component.module
 import demo.action.{LoginFormAction => action}
 import demo.component.CssStyle.Color
 import demo.component.button.PrimaryButton
-import demo.component.element.{EmptyDiv, Message}
-import demo.component.input.{EmailTextInput, PasswordTextInput}
+import demo.component.element.{EmptyDiv, Field, Message}
+import demo.component.input.{EmailTextInput, FieldCheckBox, PasswordTextInput}
 import demo.model.{ClientStore, LoginFormModel}
 import sri.react._
 import sri.web.vdom.tagsPrefix_<^._
@@ -14,7 +14,9 @@ private[component] final class LoginForm extends ComponentP[LoginForm.Props] {
     <.div()(
       EmailTextInput("login-account-input", _.loginForm.data.account, action.AccountInput),
       PasswordTextInput("login-password-input", _.loginForm.data.password, action.PasswordInput),
-      PrimaryButton("login-submit-btn", "Submit", _.loginForm.submitButton, action.SubmitButtonClick),
+      FieldCheckBox("login-enable-valication-checkbox", "Enable client validation",
+        _.loginForm.enableClientValidation.toString, action.EnableValidationCheckboxChange),
+      Field(PrimaryButton("login-submit-btn", "Submit", _.loginForm.submitButton, action.SubmitButtonClick)),
       messageBlock()
     )
   }
