@@ -19,6 +19,7 @@ Which is to illustrate several idioms.
 * **Double validation** - Same validation applies twice on client and server side.
 * **Two way serialization** - Same model is serialized and de-serialized both on client and server side.
 * **Remote data binding** - Data on client view is bind transparently with a data on server.
+* **Remote Action flow** - An Action can be passed across remote boundary to the server and return to the client.
 
 ### Idioms:
 
@@ -28,9 +29,6 @@ Changing shared code, client/server contract changes simultaneously.
 
 * **Logic balance** - 
 Application logic could be implemented on client or/and server side, and moved from on side to the other with fewer constrains.
-
-* **Remote Action flow** -
-An Action can be passed across remote boundary to the server and return to the client.
 
 * **Transparent state** -
 Any part of client state can be "ported" to server side, and vice versa.
