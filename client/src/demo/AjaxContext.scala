@@ -25,7 +25,7 @@ private object AjaxContext {
       println(s"Send request: ${request.nextAction}")
       val future = Try {
         Ajax.post(
-          "api/request", data = request.serialize, headers = session.toHttpHeader, timeout = 500)
+          "api/request", data = request.serialize, headers = session.toHttpHeader, timeout = 3000)
       }.recover{case e => Future.failed(e)}.get
 
       println(s"Response future created: $future")

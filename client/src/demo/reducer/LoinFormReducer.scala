@@ -5,6 +5,7 @@ import demo.action.{ValidationAction, _}
 import demo.model.{ClientRootModel, ClientStore, LoginFormModel}
 import diode.{ActionHandler, Effect}
 import monocle.macros.syntax.lens._
+import monocle.function.At.at
 
 private[reducer] final class LoinFormReducer extends ActionHandler[ClientRootModel, LoginFormModel](ClientStore.zoomTo(_.loginForm)) {
 
@@ -21,13 +22,15 @@ private[reducer] final class LoinFormReducer extends ActionHandler[ClientRootMod
         updated(value.lens(_.data.password).set("").lens(_.submitButton.isLoading).set(false))
       case LoginFailed(msg) =>
         println(s"Login failed with message: $msg")
-        effectOnly(Effect.action(LoginClear))
+        updated(value.lens(_.errMsg).composeLens(at("Failed")).set(Some(msg)), Effect.action(LoginClear))
     }
     case action: ValidationAction => action match {
       case Valid(data) =>
-        updated(value.copy(accountErrMsg = "", passwordErrMsg = ""), Effect.action(AjaxRequest(Authenticate(data))))
-      case InvalidAccount(errMsg) => updated(value.copy(accountErrMsg = errMsg), Effect.action(LoginClear))
-      case InvalidPassword(errMsg) => updated(value.copy(passwordErrMsg = errMsg), Effect.action(LoginClear))
+        updated(value.copy(errMsg = Map.empty), Effect.action(AjaxRequest(Authenticate(data))))
+      case InvalidAccount(errMsg) =>
+        updated(value.lens(_.errMsg).composeLens(at("Account")).set(Some(errMsg)), Effect.action(LoginClear))
+      case InvalidPassword(errMsg) =>
+        updated(value.lens(_.errMsg).composeLens(at("Password")).set(Some(errMsg)), Effect.action(LoginClear))
     }
   }
 }

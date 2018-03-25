@@ -1,5 +1,5 @@
 package demo.model
 
 final case class LoginFormModel(data: Credential = Credential(),
-                                accountErrMsg: String = "", passwordErrMsg: String = "",
-                                submitButton: ButtonModel = ButtonModel()) extends Model
+                                submitButton: ButtonModel = ButtonModel(),
+                                errMsg: Map[String, String] = Map.empty) extends Model
